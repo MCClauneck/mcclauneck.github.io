@@ -20,18 +20,35 @@ directories are added, removed, or restructured.
 
 ## Site Content (`docs/`, served by GitHub Pages)
 
-No site content exists yet. When a site is added, place all pages under `docs/`
-(with `docs/index.html` as the homepage) and vendor a local copy of the shared
-MCEngine theme under `docs/` — see **Website repository structure** in
-[`AGENTS.md`](AGENTS.md).
+The site documents the MCEconomy ecosystem — the MCEconomy core and the MCMarket
+and MCSlayerRewards plugins — plus a versioned change log for each.
+
+| Path | Purpose |
+|---|---|
+| `docs/index.html` | Home page with interactive block cards linking to each project. |
+| `docs/mceconomy/index.html` | MCEconomy documentation page. |
+| `docs/mceconomy/logs/index.html` | MCEconomy change log hub (mirrors the latest release). |
+| `docs/mceconomy/logs/1/0/0/index.html` | Permalink for MCEconomy 1.0.0. |
+| `docs/market/index.html` | MCMarket documentation page. |
+| `docs/market/logs/index.html` | MCMarket change log hub. |
+| `docs/market/logs/1/0/0/index.html` | Permalink for MCMarket 1.0.0. |
+| `docs/slayerrewards/index.html` | MCSlayerRewards documentation page. |
+| `docs/slayerrewards/logs/index.html` | MCSlayerRewards change log hub. |
+| `docs/slayerrewards/logs/1/0/0/index.html` | Permalink for MCSlayerRewards 1.0.0. |
 
 ## Vendored Theme
 
 Pages carry their own local copy of the shared MCEngine theme — no runtime
-dependency on another repository. The design system is documented in this
-repository's `DESIGN.md`. When a site is added, vendor one of:
+dependency on another repository. The modular "Silver Glass" theme, documented in
+this repository's `DESIGN.md`, is vendored under `docs/`:
 
-- the modular theme (`docs/css/main.css`, `docs/css/shared/layout.css`,
-  `docs/css/shared/components.css`), or
-- the single-file theme (`docs/styles/main/style.css` plus
-  `docs/scripts/main/script.js`) with page transitions.
+| Path | Purpose |
+|---|---|
+| `docs/css/main.css` | Root design tokens and base element styles. |
+| `docs/css/shared/layout.css` | Header, nav, footer, and breadcrumbs. |
+| `docs/css/shared/components.css` | Cards, panels, accordions, tables, badges, buttons, callouts. |
+| `docs/css/home/home.css` | Home-page interactive block cards. |
+| `docs/css/logs/logs.css` | Change-log layout and change tags. |
+| `docs/js/site.js` | Runtime include loader for the shared header/footer. |
+| `docs/partials/header.html` | Shared site header/navigation fragment. |
+| `docs/partials/footer.html` | Shared site footer fragment. |

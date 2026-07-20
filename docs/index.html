@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCClauneck — Minecraft economy plugins</title>
+  <meta name="description" content="Documentation for MCEconomy and its plugins — MCMarket and MCSlayerRewards — for SpigotMC, PaperMC, and FoliaMC.">
+  <script>
+    window.SITE_ROOT = "";
+    window.PAGE_SECTION = "home";
+  </script>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/shared/layout.css">
+  <link rel="stylesheet" href="css/shared/components.css">
+  <link rel="stylesheet" href="css/home/home.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="container stack">
+
+      <section class="hero">
+        <span class="eyebrow">MCClauneck ecosystem</span>
+        <h1>A per-identity economy for Minecraft servers</h1>
+        <p class="lead">
+          MCEconomy is a multi-currency, multi-platform economy plugin built on
+          MCIdentity, where every identity is its own account. MCMarket and
+          MCSlayerRewards extend it with a GUI shop and mob-slaying rewards.
+        </p>
+        <div class="btn-row" style="margin-top:1.4rem">
+          <a class="btn btn--primary" href="mceconomy/index.html">Explore MCEconomy</a>
+          <a class="btn" href="https://github.com/MCClauneck">View on GitHub ↗</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat__num">3</div>
+            <div class="stat__label">Server platforms — SpigotMC, PaperMC, FoliaMC</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">5</div>
+            <div class="stat__label">Storage backends — SQLite, MySQL, PostgreSQL, MongoDB, central</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">1</div>
+            <div class="stat__label">Universal jar per plugin, detected at runtime</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head">
+          <span class="eyebrow">Documentation</span>
+          <h2>Pick a project</h2>
+          <p class="lead">Each project has its own reference and change log. Click a block to dive in.</p>
+        </div>
+
+        <div class="repo-grid">
+          <a class="repo-card" href="mceconomy/index.html">
+            <div class="repo-card__icon" aria-hidden="true">🪙</div>
+            <p class="repo-card__name">MCEconomy</p>
+            <p class="repo-card__pkg">io.github.mcclauneck.mceconomy</p>
+            <p class="repo-card__desc">The core economy: multi-currency accounts keyed per MCIdentity, /balance and /pay, and five storage backends.</p>
+            <div class="repo-card__foot">
+              <span class="repo-card__cta">Open docs →</span>
+              <span class="badge badge--accent">Core</span>
+            </div>
+          </a>
+
+          <a class="repo-card" href="market/index.html">
+            <div class="repo-card__icon" aria-hidden="true">🛒</div>
+            <p class="repo-card__name">MCMarket</p>
+            <p class="repo-card__pkg">io.github.mcclauneck.market</p>
+            <p class="repo-card__desc">A GUI shop plugin: infinite markets, a drag-and-drop in-game editor, and Base64 item storage.</p>
+            <div class="repo-card__foot">
+              <span class="repo-card__cta">Open docs →</span>
+              <span class="badge">Plugin</span>
+            </div>
+          </a>
+
+          <a class="repo-card" href="slayerrewards/index.html">
+            <div class="repo-card__icon" aria-hidden="true">⚔️</div>
+            <p class="repo-card__name">MCSlayerRewards</p>
+            <p class="repo-card__pkg">io.github.mcclauneck.slayerrewards</p>
+            <p class="repo-card__desc">Mob-slaying rewards: per-mob money ranges, custom drops, and holographic feedback.</p>
+            <div class="repo-card__foot">
+              <span class="repo-card__cta">Open docs →</span>
+              <span class="badge">Plugin</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head">
+          <span class="eyebrow">How it fits together</span>
+          <h2>One identity, one account</h2>
+        </div>
+        <div class="callout callout--info">
+          <span class="ic" aria-hidden="true">💡</span>
+          <div>
+            <p>MCEconomy binds balances to the active <strong>MCIdentity</strong> identity, not the
+            player. MCMarket and MCSlayerRewards are standalone plugins that run alongside MCEconomy
+            and MCIdentity and pay out through the same economy provider, so every currency stays
+            consistent across the server.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

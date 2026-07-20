@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCMarket — MCClauneck</title>
+  <meta name="description" content="MCMarket: a standalone GUI shop plugin for the MCEconomy ecosystem.">
+  <script>
+    window.SITE_ROOT = "../";
+    window.PAGE_SECTION = "market";
+  </script>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/shared/layout.css">
+  <link rel="stylesheet" href="../css/shared/components.css">
+  <script src="../js/site.js" defer></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="container stack">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">MCMarket</span>
+      </nav>
+
+      <section class="hero">
+        <span class="eyebrow">Shop plugin</span>
+        <h1>MCMarket</h1>
+        <p class="lead">A standalone, GUI-based shop for the MCEconomy ecosystem. Create unlimited
+          markets, edit them with a drag-and-drop in-game editor, and trade items for any MCEconomy
+          currency.</p>
+        <div class="chip-row" style="margin-top:1.2rem">
+          <span class="chip"><code>io.github.mcclauneck.market</code></span>
+          <span class="chip">SemVer 1.0.0</span>
+          <span class="chip">depends: MCIdentity, MCEconomy</span>
+        </div>
+        <div class="btn-row" style="margin-top:1.3rem">
+          <a class="btn btn--primary" href="logs/index.html">Change log</a>
+          <a class="btn" href="https://github.com/MCClauneck/extension-market">Repository ↗</a>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Highlights</h2></div>
+        <div class="feature-list">
+          <div class="feature-list__row"><span class="ic">🛒</span><div><b>Infinite markets.</b> Create unlimited categories — Ores, Food, Blocks — each a plain YAML file.</div></div>
+          <div class="feature-list__row"><span class="ic">🖱️</span><div><b>In-game editor.</b> Drag and drop items to set buy/sell prices; no config editing required.</div></div>
+          <div class="feature-list__row"><span class="ic">⚡</span><div><b>Asynchronous.</b> Transactions run off the main thread, and payouts flow through the MCEconomy provider.</div></div>
+          <div class="feature-list__row"><span class="ic">🧬</span><div><b>Base64 storage.</b> Every item detail — enchantments, NBT, durability — is preserved.</div></div>
+          <div class="feature-list__row"><span class="ic">🗄️</span><div><b>Five storage backends.</b> SQLite (default), MySQL, PostgreSQL, MongoDB, or the central REST server.</div></div>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Module architecture</h2>
+          <p class="lead">A multi-module Gradle build modelled on MCEconomy. The universal <code>engine</code> jar shades every module and the thin platform entry points into one plugin.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Module</th><th>Java package</th><th>Responsibility</th></tr></thead>
+            <tbody>
+              <tr><td><code>api</code></td><td><code>io.github.mcclauneck.market.api</code></td><td>Pure-Java contracts: the data-store interface and the item transport record.</td></tr>
+              <tr><td><code>common</code></td><td><code>…market.common</code></td><td>The SQLite/MySQL/PostgreSQL/MongoDB backends and the central REST client.</td></tr>
+              <tr><td><code>bukkit</code></td><td><code>…market.bukkit</code></td><td>Shared Bukkit core: provider, drag-and-drop editor, the <code>/market</code> command, and the inventory listener.</td></tr>
+              <tr><td><code>spigotmc / papermc / foliamc</code></td><td><code>…market.&lt;platform&gt;</code></td><td>Thin per-platform entry points.</td></tr>
+              <tr><td><code>engine</code></td><td><code>…market.engine</code></td><td>The universal jar for SpigotMC, PaperMC, and FoliaMC.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Command</h2></div>
+        <div class="deflist">
+          <div class="deflist__row"><div class="deflist__term"><code>/market &lt;name&gt; [page]</code></div><div>Open a market's shop GUI.</div></div>
+          <div class="deflist__row"><div class="deflist__term"><code>/market create &lt;name&gt;</code></div><div>Create a new market and open its editor (permission <code>market.admin</code>).</div></div>
+          <div class="deflist__row"><div class="deflist__term"><code>/market edit &lt;name&gt; [page]</code></div><div>Open the drag-and-drop editor for a market (permission <code>market.admin</code>).</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="callout callout--info">
+          <span class="ic" aria-hidden="true">🔗</span>
+          <div>
+            <p>MCMarket runs alongside MCEconomy and MCIdentity. It declares both in the
+            <code>depend</code> block of its <code>plugin.yml</code>, so they load first, and buys and
+            sells settle through the MCEconomy economy provider.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>
