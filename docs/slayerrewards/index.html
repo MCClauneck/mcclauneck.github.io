@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCSlayerRewards — MCClauneck</title>
+  <meta name="description" content="MCSlayerRewards: mob-slaying rewards for the MCEconomy ecosystem.">
+  <script>
+    window.SITE_ROOT = "../";
+    window.PAGE_SECTION = "slayerrewards";
+  </script>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/shared/layout.css">
+  <link rel="stylesheet" href="../css/shared/components.css">
+  <script src="../js/site.js" defer></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="container stack">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">MCSlayerRewards</span>
+      </nav>
+
+      <section class="hero">
+        <span class="eyebrow">Rewards plugin</span>
+        <h1>MCSlayerRewards</h1>
+        <p class="lead">A standalone plugin that pays players for slaying mobs — configurable money
+          ranges, custom item drops, and holographic feedback at the kill location. Payouts settle
+          through MCEconomy.</p>
+        <div class="chip-row" style="margin-top:1.2rem">
+          <span class="chip"><code>io.github.mcclauneck.slayerrewards</code></span>
+          <span class="chip">SemVer 1.0.0</span>
+          <span class="chip">depends: MCIdentity, MCEconomy</span>
+        </div>
+        <div class="btn-row" style="margin-top:1.3rem">
+          <a class="btn btn--primary" href="logs/index.html">Change log</a>
+          <a class="btn" href="https://github.com/MCClauneck/extension-slayerrewards">Repository ↗</a>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Highlights</h2></div>
+        <div class="feature-list">
+          <div class="feature-list__row"><span class="ic">⚔️</span><div><b>Per-mob rewards.</b> Give any mob a fixed or random money range and a currency, in a plain YAML file.</div></div>
+          <div class="feature-list__row"><span class="ic">🎁</span><div><b>Custom drops.</b> Add Base64 items with per-drop chances, and optionally cancel vanilla drops.</div></div>
+          <div class="feature-list__row"><span class="ic">✨</span><div><b>Holographic feedback.</b> A <code>+amount currency</code> TextDisplay pops at the death location on a payout.</div></div>
+          <div class="feature-list__row"><span class="ic">🖱️</span><div><b>GUI editor.</b> Manage loot tables and drop chances entirely in-game.</div></div>
+          <div class="feature-list__row"><span class="ic">🗄️</span><div><b>Five storage backends.</b> SQLite (default), MySQL, PostgreSQL, MongoDB, or the central REST server for kill/reward logs.</div></div>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Module architecture</h2>
+          <p class="lead">A multi-module Gradle build modelled on MCEconomy. The universal <code>engine</code> jar shades every module and the thin platform entry points into one plugin.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Module</th><th>Java package</th><th>Responsibility</th></tr></thead>
+            <tbody>
+              <tr><td><code>api</code></td><td><code>io.github.mcclauneck.slayerrewards.api</code></td><td>Pure-Java contracts: the data-store interface and the kill/reward transport records.</td></tr>
+              <tr><td><code>common</code></td><td><code>…slayerrewards.common</code></td><td>The SQLite/MySQL/PostgreSQL/MongoDB backends and the central REST client.</td></tr>
+              <tr><td><code>bukkit</code></td><td><code>…slayerrewards.bukkit</code></td><td>Shared Bukkit core: provider, mob-drop editor, the <code>/slayerrewards</code> command, and the kill listener.</td></tr>
+              <tr><td><code>spigotmc / papermc / foliamc</code></td><td><code>…slayerrewards.&lt;platform&gt;</code></td><td>Thin per-platform entry points.</td></tr>
+              <tr><td><code>engine</code></td><td><code>…slayerrewards.engine</code></td><td>The universal jar for SpigotMC, PaperMC, and FoliaMC.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Command</h2></div>
+        <div class="deflist">
+          <div class="deflist__row"><div class="deflist__term"><code>/slayerrewards edit &lt;mob&gt;</code></div><div>Open the drop editor for a mob type (alias <code>/slayer</code>).</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="callout callout--info">
+          <span class="ic" aria-hidden="true">🔗</span>
+          <div>
+            <p>MCSlayerRewards runs alongside MCEconomy and MCIdentity. It declares both in the
+            <code>depend</code> block of its <code>plugin.yml</code>, so they load first, and every
+            payout is credited through the MCEconomy economy provider.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

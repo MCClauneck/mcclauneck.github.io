@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCEconomy — MCClauneck</title>
+  <meta name="description" content="MCEconomy: a per-identity, multi-currency economy plugin for SpigotMC, PaperMC, and FoliaMC.">
+  <script>
+    window.SITE_ROOT = "../";
+    window.PAGE_SECTION = "mceconomy";
+  </script>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/shared/layout.css">
+  <link rel="stylesheet" href="../css/shared/components.css">
+  <script src="../js/site.js" defer></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="container stack">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">MCEconomy</span>
+      </nav>
+
+      <section class="hero">
+        <span class="eyebrow">Core plugin</span>
+        <h1>MCEconomy</h1>
+        <p class="lead">A per-identity, multi-currency economy for SpigotMC, PaperMC, and FoliaMC.
+          Balances belong to the active MCIdentity identity, so every character is its own account.</p>
+        <div class="chip-row" style="margin-top:1.2rem">
+          <span class="chip"><code>io.github.mcclauneck.mceconomy</code></span>
+          <span class="chip">SemVer 1.0.0</span>
+          <span class="chip">depends: MCIdentity</span>
+        </div>
+        <div class="btn-row" style="margin-top:1.3rem">
+          <a class="btn btn--primary" href="logs/index.html">Change log</a>
+          <a class="btn" href="https://github.com/MCClauneck/mceconomy">Repository ↗</a>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Highlights</h2></div>
+        <div class="feature-list">
+          <div class="feature-list__row"><span class="ic">🪙</span><div><b>Multi-currency.</b> Define any number of currencies (coin, gold, point…), each transferable or account-locked.</div></div>
+          <div class="feature-list__row"><span class="ic">🧍</span><div><b>Per-identity accounts.</b> Balances are keyed to the active MCIdentity identity, never the raw player UUID.</div></div>
+          <div class="feature-list__row"><span class="ic">💳</span><div><b><code>/balance</code> &amp; <code>/pay</code>.</b> A GUI balance view and player-to-player transfers for transferable currencies.</div></div>
+          <div class="feature-list__row"><span class="ic">🗄️</span><div><b>Five storage backends.</b> SQLite, MySQL, PostgreSQL, MongoDB, or the central REST server.</div></div>
+          <div class="feature-list__row"><span class="ic">🧩</span><div><b>Universal jar.</b> One engine jar detects SpigotMC, PaperMC, or FoliaMC at enable time.</div></div>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Module architecture</h2>
+          <p class="lead">A multi-module Gradle build. The universal <code>engine</code> jar shades the shared modules and the thin per-platform entry points into one distributable.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Module</th><th>Java package</th><th>Responsibility</th></tr></thead>
+            <tbody>
+              <tr><td><code>api</code></td><td><code>io.github.mcclauneck.mceconomy.api</code></td><td>Pure-Java contracts and models (accounts, currencies, wallets, the database interface).</td></tr>
+              <tr><td><code>common</code></td><td><code>…mceconomy.common</code></td><td>The <code>MCEconomyProvider</code> and the SQLite/MySQL/PostgreSQL/MongoDB/central backends.</td></tr>
+              <tr><td><code>bukkit</code></td><td><code>…mceconomy.bukkit</code></td><td>Shared Bukkit core: the <code>/balance</code> and <code>/pay</code> commands, GUI, scheduler abstraction, events, and the MCIdentity listener.</td></tr>
+              <tr><td><code>spigotmc / papermc / foliamc</code></td><td><code>…mceconomy.&lt;platform&gt;</code></td><td>Thin per-platform entry points, bundled into the engine jar.</td></tr>
+              <tr><td><code>engine</code></td><td><code>…mceconomy.engine</code></td><td>The universal central loader — the single distributed jar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Storage backends</h2>
+          <p class="lead">Choose a backend with <code>database.type</code> in <code>config.yml</code>. SQLite is the default and needs no configuration.</p>
+        </div>
+        <div class="accordion">
+          <details class="acc" open>
+            <summary>SQLite <span class="badge badge--ok">default</span></summary>
+            <div class="acc__body"><p>A zero-configuration local file (<code>economy.db</code>) inside the plugin data folder. Ideal for single-server setups.</p></div>
+          </details>
+          <details class="acc">
+            <summary>MySQL / PostgreSQL</summary>
+            <div class="acc__body"><p>Pooled JDBC connections for a shared network database. Configure host, port, database, username, and password under the matching key.</p></div>
+          </details>
+          <details class="acc">
+            <summary>MongoDB</summary>
+            <div class="acc__body"><p>A document store addressed by a connection URI and database name.</p></div>
+          </details>
+          <details class="acc">
+            <summary>Central REST server</summary>
+            <div class="acc__body"><p>Point every game server on the network at one MCEconomy central deployment over HTTP so balances are shared network-wide.</p></div>
+          </details>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Commands</h2></div>
+        <div class="deflist">
+          <div class="deflist__row"><div class="deflist__term"><code>/balance</code></div><div>Open the balance GUI for your active identity.</div></div>
+          <div class="deflist__row"><div class="deflist__term"><code>/pay &lt;player&gt; &lt;currency&gt; &lt;amount&gt;</code></div><div>Pay another player's active identity in a transferable currency.</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="callout callout--info">
+          <span class="ic" aria-hidden="true">🧭</span>
+          <div>
+            <p>Building a plugin on top of MCEconomy? Bind all stored data to the identity UUID
+            (from MCIdentity's equip/unequip events), never the base player UUID — see the
+            MCMarket and MCSlayerRewards pages for working examples.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

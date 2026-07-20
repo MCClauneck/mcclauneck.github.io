@@ -1,0 +1,96 @@
+/*
+ * Home page — interactive repository "block" cards.
+ * Page-specific layout only; everything else comes from the shared theme.
+ */
+
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.repo-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+  color: inherit;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.repo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  opacity: .85;
+}
+.repo-card:hover {
+  text-decoration: none;
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+
+.repo-card__icon {
+  width: 56px; height: 56px;
+  display: grid; place-items: center;
+  border-radius: 15px;
+  background: linear-gradient(160deg, var(--silver-100), var(--silver-300));
+  border: 1px solid var(--glass-border);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+.repo-card__name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--ink-900);
+  margin: 0 0 .1rem;
+}
+.repo-card__pkg {
+  font-family: var(--mono);
+  font-size: .8rem;
+  color: var(--ink-400);
+  margin: 0 0 .8rem;
+  word-break: break-all;
+}
+.repo-card__desc {
+  color: var(--ink-500);
+  font-size: .95rem;
+  margin: 0 0 1.2rem;
+}
+.repo-card__foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.repo-card__cta {
+  font-weight: 800;
+  color: var(--accent-strong);
+  font-size: .92rem;
+}
+.repo-card:hover .repo-card__cta { text-decoration: underline; }
+
+/* Small "at a glance" stat row under the hero */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+.stat {
+  background: var(--glass-faint);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.1rem;
+}
+.stat__num { font-size: 1.6rem; font-weight: 800; color: var(--ink-900); line-height: 1.1; }
+.stat__label { font-size: .85rem; color: var(--ink-500); margin-top: .2rem; }
