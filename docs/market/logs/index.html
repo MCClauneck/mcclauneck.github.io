@@ -40,22 +40,32 @@
         <div class="logs-main">
           <article class="log-entry">
             <div class="log-entry__head">
-              <span class="log-entry__version">1.0.1</span>
+              <span class="log-entry__version">1.1.0</span>
               <span class="badge badge--ok">Latest</span>
-              <span class="log-entry__date">2026-07-20</span>
+              <span class="log-entry__date">2026-07-21</span>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--improve">Changed</span></div>
               <ul>
-                <li>Aligned the MCEconomy host-dependency version the plugin compiles against to <code>1.0.0</code>.</li>
+                <li>Buying and selling now settle against your <strong>active MCIdentity identity</strong>, so money is kept per character — equip an identity before trading.</li>
+                <li>Item currencies are now the currencies configured in MCEconomy, matched by their system code. The market editor cycles through whatever currencies the server has instead of a fixed list.</li>
+                <li>Updated the plugin to the current MCEconomy provider API.</li>
+              </ul>
+            </div>
+
+            <div class="log-section">
+              <div class="log-section__title"><span class="log-tag log-tag--new">Added</span></div>
+              <ul>
+                <li>Purchases and sales now honor MCEconomy's transaction veto and announce a wallet update, so other plugins can block or react to market trades.</li>
+                <li>A sale returns your item automatically when the payout cannot be completed.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--note">Notes</span></div>
               <ul>
-                <li>Depends on MCEconomy and MCIdentity; both are listed in the <code>depend</code> block of <code>plugin.yml</code>.</li>
+                <li>Requires MCEconomy and MCIdentity; both are listed in the <code>depend</code> block of <code>plugin.yml</code>.</li>
               </ul>
             </div>
           </article>
@@ -64,7 +74,8 @@
         <aside class="logs-nav" aria-label="Versions">
           <h2>Versions</h2>
           <ul>
-            <li class="is-current"><a href="1/0/1/index.html">1.0.1 <span class="pill">Latest</span></a></li>
+            <li class="is-current"><a href="1/1/0/index.html">1.1.0 <span class="pill">Latest</span></a></li>
+            <li><a href="1/0/1/index.html">1.0.1</a></li>
             <li><a href="1/0/0/index.html">1.0.0</a></li>
           </ul>
         </aside>

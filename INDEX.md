@@ -33,10 +33,12 @@ and MCSlayerRewards plugins — plus a versioned change log for each.
 | `docs/market/logs/index.html` | MCMarket change log hub. |
 | `docs/market/logs/1/0/0/index.html` | Permalink for MCMarket 1.0.0. |
 | `docs/market/logs/1/0/1/index.html` | Permalink for MCMarket 1.0.1. |
+| `docs/market/logs/1/1/0/index.html` | Permalink for MCMarket 1.1.0. |
 | `docs/slayerrewards/index.html` | MCSlayerRewards documentation page. |
 | `docs/slayerrewards/logs/index.html` | MCSlayerRewards change log hub. |
 | `docs/slayerrewards/logs/1/0/0/index.html` | Permalink for MCSlayerRewards 1.0.0. |
 | `docs/slayerrewards/logs/1/0/1/index.html` | Permalink for MCSlayerRewards 1.0.1. |
+| `docs/slayerrewards/logs/1/1/0/index.html` | Permalink for MCSlayerRewards 1.1.0. |
 
 ## Vendored Theme
 
