@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MCMarket 1.1.1 — change log — MCClauneck</title>
-  <meta name="description" content="Permanent change log for MCMarket version 1.1.1.">
+  <title>MCMarket 1.2.0 — change log — MCClauneck</title>
+  <meta name="description" content="Permanent change log for MCMarket version 1.2.0.">
   <script>
     window.SITE_ROOT = "../../../../../";
     window.PAGE_SECTION = "market";
@@ -28,36 +28,44 @@
         <span class="sep" aria-hidden="true">/</span>
         <a href="../../../index.html">Change log</a>
         <span class="sep" aria-hidden="true">/</span>
-        <span aria-current="page">1.1.1</span>
+        <span aria-current="page">1.2.0</span>
       </nav>
 
       <section class="hero">
         <span class="eyebrow">MCMarket · permalink</span>
-        <h1>Version 1.1.1</h1>
-        <p class="lead">A permanent link to the MCMarket 1.1.1 release notes.</p>
+        <h1>Version 1.2.0</h1>
+        <p class="lead">A permanent link to the MCMarket 1.2.0 release notes.</p>
       </section>
 
       <div class="logs-layout">
         <div class="logs-main">
           <article class="log-entry">
             <div class="log-entry__head">
-              <span class="log-entry__version">1.1.1</span>
+              <span class="log-entry__version">1.2.0</span>
               <span class="badge badge--ok">Latest</span>
               <span class="log-entry__date">2026-07-21</span>
             </div>
 
             <div class="log-section">
+              <div class="log-section__title"><span class="log-tag log-tag--new">Added</span></div>
+              <ul>
+                <li>A master <code>enable</code> switch is now the first key in <code>config.yml</code>. It acts as a single on/off toggle for the whole plugin.</li>
+              </ul>
+            </div>
+
+            <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--improve">Changed</span></div>
               <ul>
-                <li>Fixed the plugin so it builds correctly against the MCEconomy host API: its Maven group is now distinct from the host's, so the MCEconomy artifacts resolve instead of being shadowed by the plugin's own modules.</li>
+                <li>MCMarket now ships disabled by default (<code>enable: false</code>). Set it to <code>true</code> in <code>config.yml</code> to activate the plugin on your server.</li>
+                <li>When <code>enable</code> is <code>false</code>, the plugin shuts itself down during startup before touching any files.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--note">Notes</span></div>
               <ul>
-                <li>No gameplay or configuration changes from 1.1.0 — the buy/sell behaviour, identity-scoped money, and MCEconomy currencies are unchanged.</li>
-                <li>Requires MCEconomy and MCIdentity; both are listed in the <code>depend</code> block of <code>plugin.yml</code>.</li>
+                <li>No storage file is written while the plugin is disabled, and the SQLite <code>market.db</code> is only created when <code>database.type</code> is <code>sqlite</code> — MySQL, PostgreSQL, MongoDB, and central backends never leave a <code>.db</code> behind.</li>
+                <li>Upgrading from 1.1.1: existing servers must set <code>enable: true</code> after the update to keep MCMarket running. No market data or currency behaviour changed.</li>
               </ul>
             </div>
           </article>
@@ -66,9 +74,9 @@
         <aside class="logs-nav" aria-label="Versions">
           <h2>Versions</h2>
           <ul>
-            <li><a href="../../2/0/index.html">1.2.0 <span class="pill">Latest</span></a></li>
-            <li class="is-current"><a href="index.html">1.1.1</a></li>
-            <li><a href="../0/index.html">1.1.0</a></li>
+            <li class="is-current"><a href="index.html">1.2.0 <span class="pill">Latest</span></a></li>
+            <li><a href="../../1/1/index.html">1.1.1</a></li>
+            <li><a href="../../1/0/index.html">1.1.0</a></li>
             <li><a href="../../0/1/index.html">1.0.1</a></li>
             <li><a href="../../0/0/index.html">1.0.0</a></li>
           </ul>
