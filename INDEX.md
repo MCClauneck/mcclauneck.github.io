@@ -29,6 +29,7 @@ and MCSlayerRewards plugins — plus a versioned change log for each.
 | `docs/mceconomy/index.html` | MCEconomy documentation page. |
 | `docs/mceconomy/logs/index.html` | MCEconomy change log hub (mirrors the latest release). |
 | `docs/mceconomy/logs/1/0/0/index.html` | Permalink for MCEconomy 1.0.0. |
+| `docs/mceconomy/logs/1/1/0/index.html` | Permalink for MCEconomy 1.1.0. |
 | `docs/market/index.html` | MCMarket documentation page. |
 | `docs/market/logs/index.html` | MCMarket change log hub. |
 | `docs/market/logs/1/0/0/index.html` | Permalink for MCMarket 1.0.0. |
@@ -36,6 +37,7 @@ and MCSlayerRewards plugins — plus a versioned change log for each.
 | `docs/market/logs/1/1/0/index.html` | Permalink for MCMarket 1.1.0. |
 | `docs/market/logs/1/1/1/index.html` | Permalink for MCMarket 1.1.1. |
 | `docs/market/logs/1/2/0/index.html` | Permalink for MCMarket 1.2.0. |
+| `docs/market/logs/1/3/0/index.html` | Permalink for MCMarket 1.3.0. |
 | `docs/slayerrewards/index.html` | MCSlayerRewards documentation page. |
 | `docs/slayerrewards/logs/index.html` | MCSlayerRewards change log hub. |
 | `docs/slayerrewards/logs/1/0/0/index.html` | Permalink for MCSlayerRewards 1.0.0. |
@@ -43,6 +45,7 @@ and MCSlayerRewards plugins — plus a versioned change log for each.
 | `docs/slayerrewards/logs/1/1/0/index.html` | Permalink for MCSlayerRewards 1.1.0. |
 | `docs/slayerrewards/logs/1/1/1/index.html` | Permalink for MCSlayerRewards 1.1.1. |
 | `docs/slayerrewards/logs/1/2/0/index.html` | Permalink for MCSlayerRewards 1.2.0. |
+| `docs/slayerrewards/logs/1/3/0/index.html` | Permalink for MCSlayerRewards 1.3.0. |
 
 ## Vendored Theme
 

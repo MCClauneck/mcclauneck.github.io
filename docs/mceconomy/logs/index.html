@@ -40,42 +40,49 @@
         <div class="logs-main">
           <article class="log-entry">
             <div class="log-entry__head">
-              <span class="log-entry__version">1.0.0</span>
+              <span class="log-entry__version">1.1.0</span>
               <span class="badge badge--ok">Latest</span>
-              <span class="log-entry__date">2026-07-20</span>
+              <span class="log-entry__date">2026-08-01</span>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--new">Added</span></div>
               <ul>
-                <li>Multi-currency economy with per-currency transferability (for example coin, gold, and account-locked point).</li>
-                <li>Per-identity accounts: balances are keyed to the active MCIdentity identity.</li>
-                <li><code>/balance</code> GUI and <code>/pay &lt;player&gt; &lt;currency&gt; &lt;amount&gt;</code> transfers.</li>
-                <li>Five storage backends — SQLite, MySQL, PostgreSQL, MongoDB, and the central REST server.</li>
-                <li>A universal engine jar that runs on SpigotMC, PaperMC, and FoliaMC, detected at enable time.</li>
+                <li>Support for running on <strong>Folia</strong> alongside SpigotMC and PaperMC from the same universal jar. The engine detects the server at start-up and installs the matching scheduler.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--improve">Changed</span></div>
               <ul>
-                <li>Standardized the Java namespace to <code>io.github.mcclauneck.mceconomy</code>; published Maven coordinates remain <code>io.github.mcclauneck:&lt;module&gt;</code>.</li>
+                <li>MCEconomy no longer needs the MCIdentity developer artifacts to build. The identity integration is now resolved at runtime through the MCIdentity plugin itself, so the two plugins can be updated independently.</li>
+                <li>Plugins that build against the published <code>api</code>, <code>common</code>, and <code>bukkit</code> libraries no longer inherit an MCIdentity dependency.</li>
+              </ul>
+            </div>
+
+            <div class="log-section">
+              <div class="log-section__title"><span class="log-tag log-tag--fix">Fixed</span></div>
+              <ul>
+                <li>The build failed outright because it referenced MCIdentity <code>2.0.0</code>, which is no longer published. MCEconomy now targets MCIdentity <strong>4.0.1</strong> at runtime and pins no version at build time.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--note">Notes</span></div>
               <ul>
-                <li>Requires MCIdentity on the server; declare it in <code>depend</code> for correct load order.</li>
+                <li>Upgrading from 1.0.0: install MCIdentity 4.0.1 or newer. No config, command, currency, or wallet behaviour changed, and no data migration is required.</li>
+                <li>If MCIdentity is missing or too old, MCEconomy now logs the problem once and leaves identity wallets unavailable instead of failing to start.</li>
               </ul>
             </div>
+
           </article>
         </div>
 
         <aside class="logs-nav" aria-label="Versions">
           <h2>Versions</h2>
           <ul>
-            <li class="is-current"><a href="1/0/0/index.html">1.0.0 <span class="pill">Latest</span></a></li>
+            <li class="is-current"><a href="1/1/0/index.html">1.1.0 <span class="pill">Latest</span></a></li>
+            <li><a href="1/0/0/index.html">1.0.0</a></li>
           </ul>
         </aside>
       </div>
