@@ -35,3 +35,10 @@ then the files below.
 | [`architecture/index-template.md`](architecture/index-template.md) | The Universal Repository Index Template. |
 | [`architecture/agent-directories.md`](architecture/agent-directories.md) | The standard `.agents/` directory layout. |
 | [`architecture/website.md`](architecture/website.md) | This repository's own website structure and how-to guides. |
+
+## memory/
+
+| File | Purpose |
+|---|---|
+| [`memory/README.md`](memory/README.md) | What the task records are and how they are kept. |
+| [`memory/tasks/website-content-refresh.md`](memory/tasks/website-content-refresh.md) | Task record for the website content refresh. |
