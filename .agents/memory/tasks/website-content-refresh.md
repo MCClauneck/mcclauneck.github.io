@@ -51,3 +51,10 @@ Branches stack: task 1 from `master`, task k from task k-1.
 
 Created this record and the `.agents/memory/` folder, and indexed both. Nothing else
 changed. Tasks 2 to 6 reuse content already drafted and checked against the plugin source.
+
+### Task 2 — docs/mceconomy-page
+
+Rewrote the MCEconomy page from the plugin source: how per-character wallets work, the
+seven default currencies and which can be traded, the balance menu, the rules a payment
+must pass, storage options, setup, and the developer integration in prose. Version shown as
+1.1.0. The module table and all code formatting are gone.
