@@ -71,3 +71,8 @@ Rewrote the MCSlayerRewards page: what happens when a mob dies, the editor contr
 currency rules (a missing currency pays Coin, an unknown one skips the money, following
 the code rather than the wiki), setup, and storage. Version shown as 1.3.0 and the
 repository link now points at slayer-rewards.
+
+### Task 5 — docs/home-page
+
+Home page cards show each plugin's version instead of its Java package name, and the
+hero, stats, card and overview text is rewritten in plain language.
