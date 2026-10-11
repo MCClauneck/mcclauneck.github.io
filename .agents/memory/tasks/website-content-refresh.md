@@ -76,3 +76,10 @@ repository link now points at slayer-rewards.
 
 Home page cards show each plugin's version instead of its Java package name, and the
 hero, stats, card and overview text is rewritten in plain language.
+
+### Task 6 — docs/change-logs
+
+Every change log page now uses plain wording for config keys, file names, command syntax,
+version tags and package names. Each entry keeps its meaning. After this task the site has
+no code or preformatted elements. Left for task 7: a version for the website, which needs
+the owner's approval.

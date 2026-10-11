@@ -49,7 +49,7 @@
               <div class="log-section__title"><span class="log-tag log-tag--new">Added</span></div>
               <ul>
                 <li>GUI shop with unlimited markets, each defined by a plain YAML file.</li>
-                <li>Drag-and-drop in-game editor via <code>/market create</code> and <code>/market edit</code>.</li>
+                <li>Drag-and-drop in-game editor, opened with the create and edit options of the market command.</li>
                 <li>Base64 item storage that preserves enchantments, NBT, and durability.</li>
                 <li>Five storage backends — SQLite, MySQL, PostgreSQL, MongoDB, and the central REST server.</li>
                 <li>A universal engine jar that runs on SpigotMC, PaperMC, and FoliaMC.</li>
@@ -59,14 +59,14 @@
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--improve">Changed</span></div>
               <ul>
-                <li>Rebuilt from an MCEconomy extension into a standalone multi-module plugin (<code>MCMarket</code>), with the namespace <code>io.github.mcclauneck.market</code>.</li>
+                <li>Rebuilt from an MCEconomy extension into a standalone plugin named MCMarket.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--note">Notes</span></div>
               <ul>
-                <li>Depends on MCEconomy and MCIdentity; both are listed in the <code>depend</code> block of <code>plugin.yml</code>.</li>
+                <li>Depends on MCEconomy and MCIdentity; the server loads both before this plugin.</li>
               </ul>
             </div>
           </article>

@@ -48,10 +48,10 @@
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--new">Added</span></div>
               <ul>
-                <li>Per-mob money rewards — a fixed value or a random <code>min-max</code> range in any MCEconomy currency.</li>
+                <li>Per-mob money rewards — a fixed value or a random range between a minimum and a maximum in any MCEconomy currency.</li>
                 <li>Custom Base64 item drops with per-drop chances, and an option to cancel vanilla drops.</li>
-                <li>Holographic <code>+amount currency</code> feedback at the kill location.</li>
-                <li>In-game drop editor via <code>/slayerrewards edit &lt;mob&gt;</code> (alias <code>/slayer</code>).</li>
+                <li>Floating reward text at the kill location, showing the amount and currency earned.</li>
+                <li>In-game drop editor, opened for a mob type with the edit option of the slayer rewards command or its shorter slayer alias.</li>
                 <li>Five storage backends for kill/reward logs — SQLite, MySQL, PostgreSQL, MongoDB, and the central REST server.</li>
                 <li>A universal engine jar that runs on SpigotMC, PaperMC, and FoliaMC.</li>
               </ul>
@@ -60,14 +60,14 @@
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--improve">Changed</span></div>
               <ul>
-                <li>Rebuilt from an MCEconomy extension into a standalone multi-module plugin (<code>MCSlayerRewards</code>), with the namespace <code>io.github.mcclauneck.slayerrewards</code>.</li>
+                <li>Rebuilt from an MCEconomy extension into a standalone plugin named MCSlayerRewards.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--note">Notes</span></div>
               <ul>
-                <li>Depends on MCEconomy and MCIdentity; both are listed in the <code>depend</code> block of <code>plugin.yml</code>.</li>
+                <li>Depends on MCEconomy and MCIdentity; the server loads both before this plugin.</li>
               </ul>
             </div>
           </article>
