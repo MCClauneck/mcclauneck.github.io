@@ -29,65 +29,127 @@
       <section class="hero">
         <span class="eyebrow">Rewards plugin</span>
         <h1>MCSlayerRewards</h1>
-        <p class="lead">A standalone plugin that pays players for slaying mobs — configurable money
-          ranges, custom item drops, and holographic feedback at the kill location. Payouts settle
-          through MCEconomy.</p>
+        <p class="lead">MCSlayerRewards pays players for killing mobs. You decide, mob by mob, how
+          much money a kill is worth, which currency it pays in, and which extra items drop. The
+          reward floats above the kill so the player sees it straight away.</p>
         <div class="chip-row" style="margin-top:1.2rem">
-          <span class="chip"><code>io.github.mcclauneck.slayerrewards</code></span>
-          <span class="chip">SemVer 1.0.0</span>
-          <span class="chip">depends: MCIdentity, MCEconomy</span>
+          <span class="chip">Version 1.3.0</span>
+          <span class="chip">Requires MCIdentity and MCEconomy</span>
+          <span class="chip">Minecraft 1.21 or newer</span>
+          <span class="chip">SpigotMC, PaperMC, FoliaMC</span>
         </div>
         <div class="btn-row" style="margin-top:1.3rem">
           <a class="btn btn--primary" href="logs/index.html">Change log</a>
-          <a class="btn" href="https://github.com/MCClauneck/extension-slayerrewards">Repository ↗</a>
+          <a class="btn" href="https://github.com/MCClauneck/slayer-rewards">Repository ↗</a>
         </div>
       </section>
 
       <section class="section stack">
         <div class="section__head"><h2>Highlights</h2></div>
         <div class="feature-list">
-          <div class="feature-list__row"><span class="ic">⚔️</span><div><b>Per-mob rewards.</b> Give any mob a fixed or random money range and a currency, in a plain YAML file.</div></div>
-          <div class="feature-list__row"><span class="ic">🎁</span><div><b>Custom drops.</b> Add Base64 items with per-drop chances, and optionally cancel vanilla drops.</div></div>
-          <div class="feature-list__row"><span class="ic">✨</span><div><b>Holographic feedback.</b> A <code>+amount currency</code> TextDisplay pops at the death location on a payout.</div></div>
-          <div class="feature-list__row"><span class="ic">🖱️</span><div><b>GUI editor.</b> Manage loot tables and drop chances entirely in-game.</div></div>
-          <div class="feature-list__row"><span class="ic">🗄️</span><div><b>Five storage backends.</b> SQLite (default), MySQL, PostgreSQL, MongoDB, or the central REST server for kill/reward logs.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">⚔️</span><div><b>Rewards per mob.</b> Give each mob type a fixed amount or a random range, such as anywhere from 10 to 50 coins.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🎁</span><div><b>Custom drops.</b> Add any items as extra loot, each with its own drop chance and stack size.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🚫</span><div><b>Control vanilla drops.</b> Keep a mob's normal drops, or switch them off so only your custom loot appears.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">✨</span><div><b>Floating reward text.</b> A green line showing the amount and currency pops up where the mob died.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🖱️</span><div><b>Set up in game.</b> A chest-menu editor handles loot, chances, money, and currency without opening a file.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🗄️</span><div><b>Five places to keep data.</b> A local file by default, or MySQL, PostgreSQL, MongoDB, or the MCEconomy central server.</div></div>
         </div>
       </section>
 
       <section class="section stack">
-        <div class="section__head"><h2>Module architecture</h2>
-          <p class="lead">A multi-module Gradle build modelled on MCEconomy. The universal <code>engine</code> jar shades every module and the thin platform entry points into one plugin.</p>
+        <div class="section__head">
+          <h2>What happens when a mob dies</h2>
+          <p class="lead">Rewards only apply when a player lands the killing blow, and only for
+            mob types you have set up. Every other mob behaves exactly as normal.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">1</div>
+            <p class="card__title">Drops are rolled</p>
+            <p class="card__desc">If vanilla drops are switched off for this mob, they are cleared. Each custom drop then rolls its own chance and is added to the loot when it succeeds.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">2</div>
+            <p class="card__title">Money is worked out</p>
+            <p class="card__desc">A fixed amount is paid as is. A range picks a new random amount for every kill. If the amount is zero or missing, no money is paid.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">3</div>
+            <p class="card__title">The character is paid</p>
+            <p class="card__desc">The money goes to the MCIdentity character the killer is using, in the mob's currency. Players with no active character get the drops but no money.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">4</div>
+            <p class="card__title">The reward appears</p>
+            <p class="card__desc">A plus sign, the amount, and the currency float just above the death spot for a moment and then disappear. Nearby players can see it too.</p>
+          </div>
+        </div>
+        <div class="callout callout--info">
+          <span class="ic" aria-hidden="true">💡</span>
+          <div>
+            <p>A mob with no currency chosen pays in Coin. If its currency does not exist in
+            MCEconomy, the money part of the reward is skipped and a warning is written to the
+            server log. Another plugin can also block a payout, in which case nothing is paid.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head">
+          <h2>The reward editor</h2>
+          <p class="lead">Admins open the editor with the edit option of the slayer rewards
+            command, followed by a mob type such as zombie, skeleton, or blaze. A shorter slayer
+            alias works too. If the mob has no rewards yet, it starts with no money and Coin as its currency.</p>
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Module</th><th>Java package</th><th>Responsibility</th></tr></thead>
+            <thead><tr><th>In the editor</th><th>What it does</th></tr></thead>
             <tbody>
-              <tr><td><code>api</code></td><td><code>io.github.mcclauneck.slayerrewards.api</code></td><td>Pure-Java contracts: the data-store interface and the kill/reward transport records.</td></tr>
-              <tr><td><code>common</code></td><td><code>…slayerrewards.common</code></td><td>The SQLite/MySQL/PostgreSQL/MongoDB backends and the central REST client.</td></tr>
-              <tr><td><code>bukkit</code></td><td><code>…slayerrewards.bukkit</code></td><td>Shared Bukkit core: provider, mob-drop editor, the <code>/slayerrewards</code> command, and the kill listener.</td></tr>
-              <tr><td><code>spigotmc / papermc / foliamc</code></td><td><code>…slayerrewards.&lt;platform&gt;</code></td><td>Thin per-platform entry points.</td></tr>
-              <tr><td><code>engine</code></td><td><code>…slayerrewards.engine</code></td><td>The universal jar for SpigotMC, PaperMC, and FoliaMC.</td></tr>
+              <tr><td>Place an item in the top rows</td><td>Adds it as a custom drop, keeping every detail of the item.</td></tr>
+              <tr><td>Shift and right click a drop</td><td>Asks in chat for its drop chance, from 0 to 100 percent.</td></tr>
+              <tr><td>Currency head</td><td>Moves the mob's reward to the next MCEconomy currency.</td></tr>
+              <tr><td>Vanilla drops button</td><td>Turns the mob's normal drops on or off.</td></tr>
+              <tr><td>Reward amount button</td><td>Asks in chat for the money reward, either one number or a low and high number joined by a dash.</td></tr>
+              <tr><td>Save and Reload head</td><td>Saves the page and refreshes the editor.</td></tr>
+              <tr><td>Arrow heads</td><td>Save the page and move to the previous or next page of drops.</td></tr>
             </tbody>
           </table>
         </div>
+        <p>Each page holds 45 drops. Chances above 100 or below 0 are capped to fit, and a chance
+          that is not a number cancels the change. Each mob's rewards are saved in their own file,
+          named after the mob, so you can also edit them by hand.</p>
+        <p>The command is for admins only and needs the slayer rewards admin permission. Players
+          never need a command, because rewards are handed out automatically.</p>
       </section>
 
       <section class="section stack">
-        <div class="section__head"><h2>Command</h2></div>
-        <div class="deflist">
-          <div class="deflist__row"><div class="deflist__term"><code>/slayerrewards edit &lt;mob&gt;</code></div><div>Open the drop editor for a mob type (alias <code>/slayer</code>).</div></div>
+        <div class="section__head">
+          <h2>Setup and storage</h2>
+          <p class="lead">MCSlayerRewards is a normal plugin that runs next to MCEconomy and
+            MCIdentity. The server loads both of them before it.</p>
         </div>
-      </section>
-
-      <section class="section">
-        <div class="callout callout--info">
-          <span class="ic" aria-hidden="true">🔗</span>
-          <div>
-            <p>MCSlayerRewards runs alongside MCEconomy and MCIdentity. It declares both in the
-            <code>depend</code> block of its <code>plugin.yml</code>, so they load first, and every
-            payout is credited through the MCEconomy economy provider.</p>
-          </div>
+        <ol>
+          <li>Install MCIdentity and MCEconomy first.</li>
+          <li>Add the MCSlayerRewards plugin file and start the server once to create its settings file.</li>
+          <li>Turn on the master switch in the settings file. A fresh install ships switched off and creates no data until you turn it on.</li>
+          <li>Choose where the kill and reward history is stored, then restart.</li>
+        </ol>
+        <div class="accordion">
+          <details class="acc" open>
+            <summary>Local file <span class="badge badge--ok">default</span></summary>
+            <div class="acc__body"><p>A database file inside the plugin's folder. Nothing to set up.</p></div>
+          </details>
+          <details class="acc">
+            <summary>MySQL, PostgreSQL, or MongoDB</summary>
+            <div class="acc__body"><p>A shared database, reached with its address and login, exactly as in MCEconomy.</p></div>
+          </details>
+          <details class="acc">
+            <summary>Central server</summary>
+            <div class="acc__body"><p>Every mob a player kills and every payout is recorded on the MCEconomy central server, giving your network one history. If its address is left empty, MCSlayerRewards warns you and keeps the history on this server only.</p></div>
+          </details>
         </div>
+        <p>If MCEconomy or MCIdentity is missing or not ready, MCSlayerRewards says so once and
+          stops paying money instead of breaking the server. The server needs Java 25.</p>
       </section>
 
     </div>
