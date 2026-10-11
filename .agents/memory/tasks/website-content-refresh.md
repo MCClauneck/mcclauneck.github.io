@@ -64,3 +64,10 @@ must pass, storage options, setup, and the developer integration in prose. Versi
 Rewrote the MCMarket page: buying and selling rules, the editor controls, commands and
 permission in words, setup, and storage including the central server. Version shown as
 1.3.0 and the repository link now points at market.
+
+### Task 4 — docs/slayerrewards-page
+
+Rewrote the MCSlayerRewards page: what happens when a mob dies, the editor controls, the
+currency rules (a missing currency pays Coin, an unknown one skips the money, following
+the code rather than the wiki), setup, and storage. Version shown as 1.3.0 and the
+repository link now points at slayer-rewards.
