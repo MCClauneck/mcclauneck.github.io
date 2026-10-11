@@ -13,6 +13,7 @@ has its own `README.md` explaining what it holds.
 | [`rules/`](rules/) | Behavioural rules: iron rules and execution standards. |
 | [`git/`](git/) | Git and branching workflow. |
 | [`architecture/`](architecture/) | Repository structure, the index template, agent-directory layout, and this site's own structure. |
+| [`memory/`](memory/) | Task records for agreed multi-step work. |
 
 Agents must use only the `.agents/` directory belonging to the current
 repository, and must not cross-reference another repository's `.agents/`.
