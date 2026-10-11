@@ -29,12 +29,14 @@
       <section class="hero">
         <span class="eyebrow">Core plugin</span>
         <h1>MCEconomy</h1>
-        <p class="lead">A per-identity, multi-currency economy for SpigotMC, PaperMC, and FoliaMC.
-          Balances belong to the active MCIdentity identity, so every character is its own account.</p>
+        <p class="lead">MCEconomy is the money system for your Minecraft server. It holds as many
+          currencies as you like, and it keeps a separate wallet for every MCIdentity character
+          a player owns, so each character earns and spends on its own.</p>
         <div class="chip-row" style="margin-top:1.2rem">
-          <span class="chip"><code>io.github.mcclauneck.mceconomy</code></span>
-          <span class="chip">SemVer 1.0.0</span>
-          <span class="chip">depends: MCIdentity</span>
+          <span class="chip">Version 1.1.0</span>
+          <span class="chip">Requires MCIdentity 4.0.1 or newer</span>
+          <span class="chip">Minecraft 1.20 or newer</span>
+          <span class="chip">SpigotMC, PaperMC, FoliaMC</span>
         </div>
         <div class="btn-row" style="margin-top:1.3rem">
           <a class="btn btn--primary" href="logs/index.html">Change log</a>
@@ -45,71 +47,173 @@
       <section class="section stack">
         <div class="section__head"><h2>Highlights</h2></div>
         <div class="feature-list">
-          <div class="feature-list__row"><span class="ic">🪙</span><div><b>Multi-currency.</b> Define any number of currencies (coin, gold, point…), each transferable or account-locked.</div></div>
-          <div class="feature-list__row"><span class="ic">🧍</span><div><b>Per-identity accounts.</b> Balances are keyed to the active MCIdentity identity, never the raw player UUID.</div></div>
-          <div class="feature-list__row"><span class="ic">💳</span><div><b><code>/balance</code> &amp; <code>/pay</code>.</b> A GUI balance view and player-to-player transfers for transferable currencies.</div></div>
-          <div class="feature-list__row"><span class="ic">🗄️</span><div><b>Five storage backends.</b> SQLite, MySQL, PostgreSQL, MongoDB, or the central REST server.</div></div>
-          <div class="feature-list__row"><span class="ic">🧩</span><div><b>Universal jar.</b> One engine jar detects SpigotMC, PaperMC, or FoliaMC at enable time.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🧍</span><div><b>One wallet per character.</b> Money belongs to the character a player is currently playing as, never to the player's Minecraft account as a whole.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🪙</span><div><b>Any number of currencies.</b> Seven come ready to use, and you can add, rename, or remove them freely. Each one is either tradeable between players or locked to whoever earned it.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">💳</span><div><b>Balance window and payments.</b> Players see every balance in a menu of currency heads, and can pay each other in tradeable currencies.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🧾</span><div><b>Full audit trail.</b> Every change to a balance is recorded with what caused it, so any transaction can be traced later.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🗄️</span><div><b>Five places to keep data.</b> A local file out of the box, or MySQL, PostgreSQL, MongoDB, or one central server shared by your whole network.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🧩</span><div><b>One download for every server type.</b> The same plugin file runs on SpigotMC, PaperMC, and FoliaMC and works out which one it is on by itself.</div></div>
         </div>
       </section>
 
       <section class="section stack">
-        <div class="section__head"><h2>Module architecture</h2>
-          <p class="lead">A multi-module Gradle build. The universal <code>engine</code> jar shades the shared modules and the thin per-platform entry points into one distributable.</p>
+        <div class="section__head">
+          <h2>How it works</h2>
+          <p class="lead">MCEconomy is built on top of MCIdentity, the plugin that lets one player
+            own several characters. Each character is treated as a completely separate person.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">1</div>
+            <p class="card__title">A player picks a character</p>
+            <p class="card__desc">When a player switches to one of their MCIdentity characters, MCEconomy makes sure that character has its own economy account.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">2</div>
+            <p class="card__title">Wallets open as needed</p>
+            <p class="card__desc">The account holds one wallet per currency. A wallet is created the first time the character receives or checks that currency.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">3</div>
+            <p class="card__title">Every change is checked</p>
+            <p class="card__desc">Amounts can never be negative and a wallet can never go below zero. Anything that would overdraw a wallet is refused.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">4</div>
+            <p class="card__title">Every change is recorded</p>
+            <p class="card__desc">Each change is logged as money sent, received, spent, or donated, together with the reason it happened.</p>
+          </div>
+        </div>
+        <div class="callout callout--info">
+          <span class="ic" aria-hidden="true">💡</span>
+          <div>
+            <p>Because money follows the character, switching characters also switches wallets. A
+            player's warrior and their merchant never share a balance.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head">
+          <h2>Currencies</h2>
+          <p class="lead">Each currency has a short internal name, a display name players see, an
+            optional head picture for the balance window, and a setting that decides whether it can
+            change hands.</p>
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Module</th><th>Java package</th><th>Responsibility</th></tr></thead>
+            <thead><tr><th>Currency</th><th>Can players pay it to each other?</th></tr></thead>
             <tbody>
-              <tr><td><code>api</code></td><td><code>io.github.mcclauneck.mceconomy.api</code></td><td>Pure-Java contracts and models (accounts, currencies, wallets, the database interface).</td></tr>
-              <tr><td><code>common</code></td><td><code>…mceconomy.common</code></td><td>The <code>MCEconomyProvider</code> and the SQLite/MySQL/PostgreSQL/MongoDB/central backends.</td></tr>
-              <tr><td><code>bukkit</code></td><td><code>…mceconomy.bukkit</code></td><td>Shared Bukkit core: the <code>/balance</code> and <code>/pay</code> commands, GUI, scheduler abstraction, events, and the MCIdentity listener.</td></tr>
-              <tr><td><code>spigotmc / papermc / foliamc</code></td><td><code>…mceconomy.&lt;platform&gt;</code></td><td>Thin per-platform entry points, bundled into the engine jar.</td></tr>
-              <tr><td><code>engine</code></td><td><code>…mceconomy.engine</code></td><td>The universal central loader — the single distributed jar.</td></tr>
+              <tr><td>Coin</td><td>Yes</td></tr>
+              <tr><td>Copper</td><td>Yes</td></tr>
+              <tr><td>Silver</td><td>Yes</td></tr>
+              <tr><td>Gold</td><td>Yes</td></tr>
+              <tr><td>Point</td><td>No, it stays with whoever earned it</td></tr>
+              <tr><td>Credit</td><td>No, it stays with whoever earned it</td></tr>
+              <tr><td>Token</td><td>No, it stays with whoever earned it</td></tr>
             </tbody>
           </table>
         </div>
+        <p>These seven are the defaults in a fresh install. Any currency listed in the settings file
+          is created when the plugin starts, and a changed display name or tradeable setting takes
+          effect on the next start. A currency is tradeable unless you say otherwise.</p>
       </section>
 
       <section class="section stack">
-        <div class="section__head"><h2>Storage backends</h2>
-          <p class="lead">Choose a backend with <code>database.type</code> in <code>config.yml</code>. SQLite is the default and needs no configuration.</p>
+        <div class="section__head"><h2>What players can do</h2></div>
+        <div class="accordion">
+          <details class="acc" open>
+            <summary>Check balances</summary>
+            <div class="acc__body">
+              <p>The balance command opens a menu with one head for each currency, showing how much
+                of it the current character holds. The menu grows by one row for every nine
+                currencies, and when there are more currencies than fit, arrows at the bottom move
+                between pages. Empty spaces are filled with plain black glass. Items in the menu
+                cannot be taken.</p>
+            </div>
+          </details>
+          <details class="acc">
+            <summary>Pay another player</summary>
+            <div class="acc__body">
+              <p>The pay command sends money from your current character to the character another
+                player is currently using. You name the player, the currency, and the amount.
+                The payment goes through only when:</p>
+              <ul>
+                <li>the other player is online and is not you,</li>
+                <li>the currency exists and is tradeable,</li>
+                <li>the amount is a whole number above zero,</li>
+                <li>both of you have an active character, and</li>
+                <li>you have enough of that currency.</li>
+              </ul>
+              <p>The money leaves one wallet and arrives in the other in a single step, so it can
+                never be lost halfway. Both players get a message confirming the payment. Another
+                plugin on the server may also block a payment, in which case you are told it was
+                blocked.</p>
+            </div>
+          </details>
+        </div>
+        <p>Both commands are open to every player with no permission needed, and both always act
+          on the character the player is currently using.</p>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head">
+          <h2>Where data is kept</h2>
+          <p class="lead">You choose one storage option in the settings file. The local file is the
+            default and needs no setup.</p>
         </div>
         <div class="accordion">
           <details class="acc" open>
-            <summary>SQLite <span class="badge badge--ok">default</span></summary>
-            <div class="acc__body"><p>A zero-configuration local file (<code>economy.db</code>) inside the plugin data folder. Ideal for single-server setups.</p></div>
+            <summary>Local file <span class="badge badge--ok">default</span></summary>
+            <div class="acc__body"><p>A small database file inside the plugin's own folder. Best for a single server.</p></div>
           </details>
           <details class="acc">
-            <summary>MySQL / PostgreSQL</summary>
-            <div class="acc__body"><p>Pooled JDBC connections for a shared network database. Configure host, port, database, username, and password under the matching key.</p></div>
+            <summary>MySQL or PostgreSQL</summary>
+            <div class="acc__body"><p>A shared database server, reached with its address, database name, and login. Good when several servers should read the same balances.</p></div>
           </details>
           <details class="acc">
             <summary>MongoDB</summary>
-            <div class="acc__body"><p>A document store addressed by a connection URI and database name.</p></div>
+            <div class="acc__body"><p>A document database, reached with its connection address and database name.</p></div>
           </details>
           <details class="acc">
-            <summary>Central REST server</summary>
-            <div class="acc__body"><p>Point every game server on the network at one MCEconomy central deployment over HTTP so balances are shared network-wide.</p></div>
+            <summary>Central server</summary>
+            <div class="acc__body"><p>Every game server on your network talks to one MCEconomy central server over the web, using its address and a shared access token. Balances are then the same everywhere a player goes.</p></div>
           </details>
         </div>
       </section>
 
       <section class="section stack">
-        <div class="section__head"><h2>Commands</h2></div>
-        <div class="deflist">
-          <div class="deflist__row"><div class="deflist__term"><code>/balance</code></div><div>Open the balance GUI for your active identity.</div></div>
-          <div class="deflist__row"><div class="deflist__term"><code>/pay &lt;player&gt; &lt;currency&gt; &lt;amount&gt;</code></div><div>Pay another player's active identity in a transferable currency.</div></div>
-        </div>
+        <div class="section__head"><h2>Getting started</h2></div>
+        <ol>
+          <li>Install MCIdentity 4.0.1 or newer. MCEconomy will not load without it, and the server always starts MCIdentity first.</li>
+          <li>Add the MCEconomy plugin file to your server and start it once. This creates the settings file.</li>
+          <li>Open the settings file and turn on the master switch. A fresh install ships switched off, and MCEconomy shuts itself down until you turn it on.</li>
+          <li>Pick a storage option and adjust the currency list if you want to.</li>
+          <li>Restart the server.</li>
+        </ol>
+        <p>The server needs Java 25. Database drivers are downloaded by the server automatically.
+          If MCIdentity is missing or too old, MCEconomy reports it once and leaves character
+          wallets unavailable rather than stopping the server from starting.</p>
       </section>
 
-      <section class="section">
+      <section class="section stack">
+        <div class="section__head">
+          <h2>For plugin developers</h2>
+          <p class="lead">Other plugins, such as shops, jobs, or quests, can use MCEconomy as their
+            money system.</p>
+        </div>
+        <div class="feature-list">
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🔌</span><div><b>One shared provider.</b> MCEconomy exposes a single provider that can look up currencies, read balances, check whether a wallet holds enough, give, take, set, and transfer money. All of it runs in the background so the server never waits on the database.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🛑</span><div><b>A chance to say no.</b> Before a balance changes, an event is announced that any plugin can cancel, for example to stop payouts during a minigame.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">📣</span><div><b>A notice afterwards.</b> After a balance changes, a second event announces the new balance so other plugins can react.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🏰</span><div><b>Accounts beyond players.</b> An account is identified by a type and an ID, so a clan or guild plugin can keep its own treasury that never collides with player wallets.</div></div>
+        </div>
         <div class="callout callout--info">
           <span class="ic" aria-hidden="true">🧭</span>
           <div>
-            <p>Building a plugin on top of MCEconomy? Bind all stored data to the identity UUID
-            (from MCIdentity's equip/unequip events), never the base player UUID — see the
-            MCMarket and MCSlayerRewards pages for working examples.</p>
+            <p>The one rule for developers: store money against the character, never against the
+            player's Minecraft account. MCMarket and MCSlayerRewards both follow this rule. The full
+            developer guide lives in the repository.</p>
           </div>
         </div>
       </section>
