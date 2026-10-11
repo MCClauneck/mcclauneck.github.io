@@ -29,67 +29,138 @@
       <section class="hero">
         <span class="eyebrow">Shop plugin</span>
         <h1>MCMarket</h1>
-        <p class="lead">A standalone, GUI-based shop for the MCEconomy ecosystem. Create unlimited
-          markets, edit them with a drag-and-drop in-game editor, and trade items for any MCEconomy
-          currency.</p>
+        <p class="lead">MCMarket is a chest-menu shop for your server. Players buy and sell items
+          with a click, paying in any MCEconomy currency, and admins build each shop by dragging
+          items into an in-game editor.</p>
         <div class="chip-row" style="margin-top:1.2rem">
-          <span class="chip"><code>io.github.mcclauneck.market</code></span>
-          <span class="chip">SemVer 1.0.0</span>
-          <span class="chip">depends: MCIdentity, MCEconomy</span>
+          <span class="chip">Version 1.3.0</span>
+          <span class="chip">Requires MCIdentity and MCEconomy</span>
+          <span class="chip">Minecraft 1.21 or newer</span>
+          <span class="chip">SpigotMC, PaperMC, FoliaMC</span>
         </div>
         <div class="btn-row" style="margin-top:1.3rem">
           <a class="btn btn--primary" href="logs/index.html">Change log</a>
-          <a class="btn" href="https://github.com/MCClauneck/extension-market">Repository ↗</a>
+          <a class="btn" href="https://github.com/MCClauneck/market">Repository ↗</a>
         </div>
       </section>
 
       <section class="section stack">
         <div class="section__head"><h2>Highlights</h2></div>
         <div class="feature-list">
-          <div class="feature-list__row"><span class="ic">🛒</span><div><b>Infinite markets.</b> Create unlimited categories — Ores, Food, Blocks — each a plain YAML file.</div></div>
-          <div class="feature-list__row"><span class="ic">🖱️</span><div><b>In-game editor.</b> Drag and drop items to set buy/sell prices; no config editing required.</div></div>
-          <div class="feature-list__row"><span class="ic">⚡</span><div><b>Asynchronous.</b> Transactions run off the main thread, and payouts flow through the MCEconomy provider.</div></div>
-          <div class="feature-list__row"><span class="ic">🧬</span><div><b>Base64 storage.</b> Every item detail — enchantments, NBT, durability — is preserved.</div></div>
-          <div class="feature-list__row"><span class="ic">🗄️</span><div><b>Five storage backends.</b> SQLite (default), MySQL, PostgreSQL, MongoDB, or the central REST server.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🛒</span><div><b>As many markets as you want.</b> Make one for ores, one for food, one for blocks. Each market can hold any number of pages.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🖱️</span><div><b>Built in game.</b> Drag items into the editor and set prices from chat. No settings file needs to be touched.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🪙</span><div><b>Any currency, per item.</b> Every item chooses its own MCEconomy currency, so one market can mix coins and tokens.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🧬</span><div><b>Items stay exactly as made.</b> Enchantments, custom names, durability, and every other detail are saved with the item.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">⚡</span><div><b>No lag.</b> Money and database work happen in the background, away from the game itself.</div></div>
+          <div class="feature-list__row"><span class="ic" aria-hidden="true">🗄️</span><div><b>Five places to keep data.</b> A local file by default, or MySQL, PostgreSQL, MongoDB, or the MCEconomy central server.</div></div>
         </div>
       </section>
 
       <section class="section stack">
-        <div class="section__head"><h2>Module architecture</h2>
-          <p class="lead">A multi-module Gradle build modelled on MCEconomy. The universal <code>engine</code> jar shades every module and the thin platform entry points into one plugin.</p>
+        <div class="section__head">
+          <h2>Shopping in a market</h2>
+          <p class="lead">A player opens a market by typing the market command followed by the
+            market's name, and can add a page number to jump straight to that page.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">👀</div>
+            <p class="card__title">Browse</p>
+            <p class="card__desc">The market opens as a large chest. The top five rows show up to 45 items, each with its buy price, sell price, and currency written underneath. A side that is switched off shows as not available.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">🛍️</div>
+            <p class="card__title">Left click to buy</p>
+            <p class="card__desc">You need at least one empty inventory slot. The price comes out of your current character's wallet and the item goes into your inventory.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">💰</div>
+            <p class="card__title">Right click to sell</p>
+            <p class="card__desc">You need the item in your inventory. It is taken, and the sell price is paid to your current character. If the payment fails, the item is given back.</p>
+          </div>
+          <div class="card">
+            <div class="card__icon" aria-hidden="true">📖</div>
+            <p class="card__title">Turn pages</p>
+            <p class="card__desc">Arrow heads in the bottom row lead to the previous and next pages when they exist.</p>
+          </div>
+        </div>
+        <div class="callout callout--info">
+          <span class="ic" aria-hidden="true">🧍</span>
+          <div>
+            <p>Money always belongs to the MCIdentity character a player is using. A player with
+            no active character is asked to choose one first. Another plugin can also block a
+            purchase or sale, and the player is told when that happens.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head">
+          <h2>Building a market</h2>
+          <p class="lead">Admins create a new market with the create option of the market command
+            and change an existing one with the edit option. Both open the same editor.</p>
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Module</th><th>Java package</th><th>Responsibility</th></tr></thead>
+            <thead><tr><th>In the editor</th><th>What it does</th></tr></thead>
             <tbody>
-              <tr><td><code>api</code></td><td><code>io.github.mcclauneck.market.api</code></td><td>Pure-Java contracts: the data-store interface and the item transport record.</td></tr>
-              <tr><td><code>common</code></td><td><code>…market.common</code></td><td>The SQLite/MySQL/PostgreSQL/MongoDB backends and the central REST client.</td></tr>
-              <tr><td><code>bukkit</code></td><td><code>…market.bukkit</code></td><td>Shared Bukkit core: provider, drag-and-drop editor, the <code>/market</code> command, and the inventory listener.</td></tr>
-              <tr><td><code>spigotmc / papermc / foliamc</code></td><td><code>…market.&lt;platform&gt;</code></td><td>Thin per-platform entry points.</td></tr>
-              <tr><td><code>engine</code></td><td><code>…market.engine</code></td><td>The universal jar for SpigotMC, PaperMC, and FoliaMC.</td></tr>
+              <tr><td>Drag an item into the top rows</td><td>Adds it to the market, exactly as it is, including the stack size.</td></tr>
+              <tr><td>Shift and left click an item</td><td>Asks for the buy price in chat.</td></tr>
+              <tr><td>Shift and right click an item</td><td>Asks for the sell price in chat.</td></tr>
+              <tr><td>Middle click an item</td><td>Moves the item to the next MCEconomy currency.</td></tr>
+              <tr><td>Save and Reload head</td><td>Saves the page and refreshes the editor.</td></tr>
+              <tr><td>Arrow heads</td><td>Save the page and move to the previous or next page.</td></tr>
             </tbody>
           </table>
+        </div>
+        <p>When you are asked for a price, type a whole number in chat. Typing minus one switches
+          that side off, so an item can be buy only or sell only. Closing the editor also saves
+          your changes. Every item in the editor shows its current prices and currency, plus a
+          reminder of these controls.</p>
+        <p>Each market is saved as its own file in the plugin's folder, named after the market. On
+          first start MCMarket creates an example Ore Market so you can see how one looks. The
+          files can be edited by hand if you prefer, but the editor is the intended way.</p>
+      </section>
+
+      <section class="section stack">
+        <div class="section__head"><h2>Commands and permission</h2></div>
+        <div class="deflist">
+          <div class="deflist__row"><div class="deflist__term">Open a market</div><div>The market command with a market name, and optionally a page. Every player can use it.</div></div>
+          <div class="deflist__row"><div class="deflist__term">Create a market</div><div>The market command with the create option and a new name. Refused if that name is taken.</div></div>
+          <div class="deflist__row"><div class="deflist__term">Edit a market</div><div>The market command with the edit option, a market name, and optionally a page.</div></div>
+          <div class="deflist__row"><div class="deflist__term">Admin permission</div><div>Creating and editing need the market admin permission. Browsing, buying, and selling need nothing.</div></div>
+          <div class="deflist__row"><div class="deflist__term">Suggestions</div><div>While typing, the command suggests existing market names. Admins also see the create and edit options.</div></div>
         </div>
       </section>
 
       <section class="section stack">
-        <div class="section__head"><h2>Command</h2></div>
-        <div class="deflist">
-          <div class="deflist__row"><div class="deflist__term"><code>/market &lt;name&gt; [page]</code></div><div>Open a market's shop GUI.</div></div>
-          <div class="deflist__row"><div class="deflist__term"><code>/market create &lt;name&gt;</code></div><div>Create a new market and open its editor (permission <code>market.admin</code>).</div></div>
-          <div class="deflist__row"><div class="deflist__term"><code>/market edit &lt;name&gt; [page]</code></div><div>Open the drag-and-drop editor for a market (permission <code>market.admin</code>).</div></div>
+        <div class="section__head">
+          <h2>Setup and storage</h2>
+          <p class="lead">MCMarket is a normal plugin that runs next to MCEconomy and MCIdentity.
+            The server loads both of them before MCMarket.</p>
         </div>
-      </section>
-
-      <section class="section">
-        <div class="callout callout--info">
-          <span class="ic" aria-hidden="true">🔗</span>
-          <div>
-            <p>MCMarket runs alongside MCEconomy and MCIdentity. It declares both in the
-            <code>depend</code> block of its <code>plugin.yml</code>, so they load first, and buys and
-            sells settle through the MCEconomy economy provider.</p>
-          </div>
+        <ol>
+          <li>Install MCIdentity and MCEconomy first.</li>
+          <li>Add the MCMarket plugin file and start the server once to create its settings file.</li>
+          <li>Turn on the master switch in the settings file. A fresh install ships switched off and creates no data until you turn it on.</li>
+          <li>Choose where market data is stored, then restart.</li>
+        </ol>
+        <div class="accordion">
+          <details class="acc" open>
+            <summary>Local file <span class="badge badge--ok">default</span></summary>
+            <div class="acc__body"><p>A database file inside the plugin's folder. Nothing to set up.</p></div>
+          </details>
+          <details class="acc">
+            <summary>MySQL, PostgreSQL, or MongoDB</summary>
+            <div class="acc__body"><p>A shared database, reached with its address and login, exactly as in MCEconomy.</p></div>
+          </details>
+          <details class="acc">
+            <summary>Central server</summary>
+            <div class="acc__body"><p>Every saved market is also copied to the MCEconomy central server, so your network has one record of every shop. If the central server's address is left empty, MCMarket warns you and keeps markets on this server only.</p></div>
+          </details>
         </div>
+        <p>If MCEconomy or MCIdentity is missing or not ready, MCMarket says so once and leaves
+          trading switched off instead of breaking the server. The server needs Java 25.</p>
       </section>
 
     </div>

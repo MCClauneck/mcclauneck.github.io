@@ -58,3 +58,9 @@ Rewrote the MCEconomy page from the plugin source: how per-character wallets wor
 seven default currencies and which can be traded, the balance menu, the rules a payment
 must pass, storage options, setup, and the developer integration in prose. Version shown as
 1.1.0. The module table and all code formatting are gone.
+
+### Task 3 — docs/market-page
+
+Rewrote the MCMarket page: buying and selling rules, the editor controls, commands and
+permission in words, setup, and storage including the central server. Version shown as
+1.3.0 and the repository link now points at market.
