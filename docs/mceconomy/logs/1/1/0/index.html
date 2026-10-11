@@ -57,14 +57,14 @@
               <div class="log-section__title"><span class="log-tag log-tag--improve">Changed</span></div>
               <ul>
                 <li>MCEconomy no longer needs the MCIdentity developer artifacts to build. The identity integration is now resolved at runtime through the MCIdentity plugin itself, so the two plugins can be updated independently.</li>
-                <li>Plugins that build against the published <code>api</code>, <code>common</code>, and <code>bukkit</code> libraries no longer inherit an MCIdentity dependency.</li>
+                <li>Plugins that build against MCEconomy's published developer libraries no longer inherit an MCIdentity dependency.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--fix">Fixed</span></div>
               <ul>
-                <li>The build failed outright because it referenced MCIdentity <code>2.0.0</code>, which is no longer published. MCEconomy now targets MCIdentity <strong>4.0.1</strong> at runtime and pins no version at build time.</li>
+                <li>The build failed outright because it referenced MCIdentity 2.0.0, which is no longer published. MCEconomy now targets MCIdentity <strong>4.0.1</strong> at runtime and pins no version at build time.</li>
               </ul>
             </div>
 

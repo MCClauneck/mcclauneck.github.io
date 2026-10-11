@@ -48,23 +48,23 @@
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--new">Added</span></div>
               <ul>
-                <li>A master <code>enable</code> switch is now the first key in <code>config.yml</code>. It acts as a single on/off toggle for the whole plugin.</li>
+                <li>A master on and off switch is now the first setting in the settings file. It turns the whole plugin on or off.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--improve">Changed</span></div>
               <ul>
-                <li>MCMarket now ships disabled by default (<code>enable: false</code>). Set it to <code>true</code> in <code>config.yml</code> to activate the plugin on your server.</li>
-                <li>When <code>enable</code> is <code>false</code>, the plugin shuts itself down during startup before touching any files.</li>
+                <li>MCMarket now ships switched off by default. Turn the master switch on in the settings file to activate the plugin on your server.</li>
+                <li>While the master switch is off, the plugin shuts itself down during startup before touching any files.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--note">Notes</span></div>
               <ul>
-                <li>No storage file is written while the plugin is disabled, and the SQLite <code>market.db</code> is only created when <code>database.type</code> is <code>sqlite</code> — MySQL, PostgreSQL, MongoDB, and central backends never leave a <code>.db</code> behind.</li>
-                <li>Upgrading from 1.1.1: existing servers must set <code>enable: true</code> after the update to keep MCMarket running. No market data or currency behaviour changed.</li>
+                <li>No storage file is written while the plugin is disabled, and the SQLite database file is only created when local file storage is selected. MySQL, PostgreSQL, MongoDB, and central storage never leave a local database file behind.</li>
+                <li>Upgrading from 1.1.1: existing servers must turn the master switch on after the update to keep MCMarket running. No market data or currency behaviour changed.</li>
               </ul>
             </div>
           </article>

@@ -50,7 +50,7 @@
               <ul>
                 <li>Multi-currency economy with per-currency transferability (for example coin, gold, and account-locked point).</li>
                 <li>Per-identity accounts: balances are keyed to the active MCIdentity identity.</li>
-                <li><code>/balance</code> GUI and <code>/pay &lt;player&gt; &lt;currency&gt; &lt;amount&gt;</code> transfers.</li>
+                <li>A balance menu and payments from one player to another.</li>
                 <li>Five storage backends — SQLite, MySQL, PostgreSQL, MongoDB, and the central REST server.</li>
                 <li>A universal engine jar that runs on SpigotMC, PaperMC, and FoliaMC, detected at enable time.</li>
               </ul>
@@ -59,14 +59,14 @@
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--improve">Changed</span></div>
               <ul>
-                <li>Standardized the Java namespace to <code>io.github.mcclauneck.mceconomy</code>; published Maven coordinates remain <code>io.github.mcclauneck:&lt;module&gt;</code>.</li>
+                <li>Standardized the plugin's internal naming under the MCClauneck organization. The published developer libraries keep their existing names.</li>
               </ul>
             </div>
 
             <div class="log-section">
               <div class="log-section__title"><span class="log-tag log-tag--note">Notes</span></div>
               <ul>
-                <li>Requires MCIdentity on the server; declare it in <code>depend</code> for correct load order.</li>
+                <li>Requires MCIdentity on the server; the server loads it before MCEconomy.</li>
               </ul>
             </div>
           </article>
